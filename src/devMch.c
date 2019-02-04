@@ -75,7 +75,6 @@
 	 devMbbiMch
          ----------
 
-	 *   init_mbbi                 - mbbi initialization     
          *   mbbi_ioint_info           - Add to i/o scan list   
          *   init_mbbi_record          - Record initialization
          *   read_mbbi                 - Read multi-bit binary input
@@ -218,7 +217,6 @@ static long init_bi_record(struct biRecord *pbi);
 static long read_bi(struct biRecord *pbi);
 static long bi_ioint_info(int cmd, struct biRecord *pbi, IOSCANPVT *iopvt);
 
-static long init_mbbi(struct mbbiRecord *pmbbi);
 static long init_mbbi_record(struct mbbiRecord *pmbbi);
 static long read_mbbi(struct mbbiRecord *pmbbi);
 static long mbbi_ioint_info(int cmd, struct mbbiRecord *mbpbi, IOSCANPVT *iopvt);
@@ -258,7 +256,7 @@ MCH_DEV_SUP_SET devAiMch         = {6, NULL, NULL,              init_ai_record, 
 MCH_DEV_SUP_SET devBoMch         = {6, NULL, NULL,              init_bo_record,           NULL,                    write_bo,          NULL};
 MCH_DEV_SUP_SET devMbboMch       = {6, NULL, NULL,              init_mbbo_record,         NULL,                    write_mbbo,        NULL};
 MCH_DEV_SUP_SET devBiMch         = {6, NULL, init_bi,           init_bi_record,           bi_ioint_info,           read_bi,           NULL};
-MCH_DEV_SUP_SET devMbbiMch       = {6, NULL, init_mbbi,         init_mbbi_record,         mbbi_ioint_info,         read_mbbi,         NULL};
+MCH_DEV_SUP_SET devMbbiMch       = {6, NULL, NULL,              init_mbbi_record,         mbbi_ioint_info,         read_mbbi,         NULL};
 MCH_DEV_SUP_SET devLonginMch     = {6, NULL, NULL,              init_longin_record,       NULL,                    read_longin,       NULL};
 MCH_DEV_SUP_SET devAiFru         = {6, NULL, init_fru_ai,       init_fru_ai_record,       ai_fru_ioint_info,       read_fru_ai,       NULL};
 MCH_DEV_SUP_SET devLongoutFru    = {6, NULL, NULL,              init_fru_longout_record,  NULL,                    write_fru_longout, NULL};
@@ -932,22 +930,28 @@ short    index;
 	return status;
 }
 
-static long
-init_mbbi(struct mbbiRecord *pmbbi)
-{
-	scanIoInit( &drvMchInitScan );
-	return 0;
-}
-
 /*
 ** Add this record to our IOSCANPVT list.
 */
 static long 
 mbbi_ioint_info(int cmd, struct mbbiRecord *pmbbi, IOSCANPVT *iopvt)
 {
-       *iopvt = drvMchInitScan;
-       return 0;
-} 
+MchRec   recPvt  = pmbbi->dpvt; /* Info stored with record */
+MchDev   mch;
+MchData  mchData;
+int      inst;
+long     status  = SUCCESS;
+
+	if ( !recPvt )
+		return NO_CONVERT;
+
+	mch = recPvt->mch;
+	mchData = mch->udata;
+	inst = mchData->mchSess->instance;
+
+	*iopvt = drvSensorScan[inst];
+	return status;
+}
 
 static long 
 init_mbbi_record(struct mbbiRecord *pmbbi)
