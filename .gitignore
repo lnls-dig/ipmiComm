@@ -1,0 +1,17 @@
+# General files
+*.orig
+*.swap
+*~
+*.bak
+*.backup
+*.swp
+
+# EPICS generated
+lib/
+db
+dbd
+bin/
+O.*/
+configure/*.local
+.cproject
+.project
