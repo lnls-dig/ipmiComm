@@ -117,7 +117,7 @@ char codeStr[100];
 	switch ( code ) {
 
 		default:
-			sprintf( codeStr, "Unspecified completion code" );
+			sprintf( codeStr, "Unspecified completion code: %d", code );
 			goto codeDone;
 
 		case IPMI_COMP_CODE_NORMAL:                
