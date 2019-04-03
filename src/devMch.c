@@ -707,8 +707,11 @@ int      s = 0, inst;
 		if ( !sens->cnfg ) {
 			sensEgu( egu, sdr->units2 );
 			strcpy( pai->egu,  egu );
-			if ( sdr->str )
+
+                        /* Don't overwrite the record description field */
+			if ( sdr->str && (strlen(pai->desc) == 0) ) {
 				strcpy( pai->desc, sdr->str );
+                        }
 
 			if ( sdr->recType == SDR_TYPE_FULL_SENSOR ) {
 				sensThresh( sdr, sens, &pai->lolo, &pai->llsv, &pai->low, &pai->lsv,
