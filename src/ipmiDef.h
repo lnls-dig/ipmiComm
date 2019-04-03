@@ -101,16 +101,18 @@ typedef struct SdrFullRec_ {
 	uint8_t      nominal;       /* Nominal reading (raw units) */
 	uint8_t      normMax;       /* Normal maximum (raw units) */
 	uint8_t      normMin;       /* Normal minimum (raw units) */
+    	uint8_t      maxReading;    /* Maximum reading value (raw units) */
+	uint8_t      minReading;    /* Minimum reading value (raw units) */
 	char         str[17];       /* Sensor ID string, 16 bytes maximum */
 	/* calculated values, only supported for Full SDR */
-	int          m;             
-	int          b;             
-	int          rexp;             
-	int          bexp;             
+	int          m;
+	int          b;
+	int          rexp;
+	int          bexp;
 
 } SdrFullRec, *SdrFull;
-	
-/* 
+
+/*
  * Data structure for FRU Device Locator Record, IPMI v2.0 Table 43-7
  */
 typedef struct SdrFruRec_ {
@@ -650,6 +652,8 @@ extern size_t IPMI_MSG1_LENGTH;
 #define SDR_NOMINAL_OFFSET      31
 #define SDR_NORM_MAX_OFFSET     32
 #define SDR_NORM_MIN_OFFSET     33
+#define SDR_MAX_READING_OFFSET  34
+#define SDR_MIN_READING_OFFSET  35
 #define SDR_STR_LENGTH_OFFSET   47
 #define SDR_STR_OFFSET          48
 /*...more...*/

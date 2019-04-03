@@ -1252,21 +1252,23 @@ int m = 0, b = 0;
 	/* Full Sensor fields */
 	if ( type == SDR_TYPE_FULL_SENSOR ) {
 
-		sdr->units1     = raw[SDR_UNITS1_OFFSET];      
-		sdr->units2     = raw[SDR_UNITS2_OFFSET];    
-		sdr->units3     = raw[SDR_UNITS3_OFFSET];    
-		sdr->linear     = raw[SDR_LINEAR_OFFSET];   
-		sdr->M          = raw[SDR_M_OFFSET];   
-		sdr->MTol       = raw[SDR_M_TOL_OFFSET];   
-		sdr->B          = raw[SDR_B_OFFSET];   
+		sdr->units1     = raw[SDR_UNITS1_OFFSET];
+		sdr->units2     = raw[SDR_UNITS2_OFFSET];
+		sdr->units3     = raw[SDR_UNITS3_OFFSET];
+		sdr->linear     = raw[SDR_LINEAR_OFFSET];
+		sdr->M          = raw[SDR_M_OFFSET];
+		sdr->MTol       = raw[SDR_M_TOL_OFFSET];
+		sdr->B          = raw[SDR_B_OFFSET];
 		sdr->BAcc       = raw[SDR_B_ACC_OFFSET];
-		sdr->acc        = raw[SDR_ACC_OFFSET];   
-		sdr->RexpBexp   = raw[SDR_EXP_OFFSET];   
-		sdr->anlgChar   = raw[SDR_ANLG_CHAR_OFFSET];   
-		sdr->nominal    = raw[SDR_NOMINAL_OFFSET];   
-		sdr->normMax    = raw[SDR_NORM_MAX_OFFSET];   
-		sdr->normMin    = raw[SDR_NORM_MIN_OFFSET];   
-		sdr->strLength  = raw[SDR_STR_LENGTH_OFFSET];    
+		sdr->acc        = raw[SDR_ACC_OFFSET];
+		sdr->RexpBexp   = raw[SDR_EXP_OFFSET];
+		sdr->anlgChar   = raw[SDR_ANLG_CHAR_OFFSET];
+		sdr->nominal    = raw[SDR_NOMINAL_OFFSET];
+		sdr->normMax    = raw[SDR_NORM_MAX_OFFSET];
+		sdr->normMin    = raw[SDR_NORM_MIN_OFFSET];
+		sdr->maxReading = raw[SDR_MAX_READING_OFFSET];
+		sdr->minReading = raw[SDR_MIN_READING_OFFSET];
+		sdr->strLength  = raw[SDR_STR_LENGTH_OFFSET];
 
 		m = SENSOR_CONV_M_B( sdr->M, sdr->MTol );
 		b = SENSOR_CONV_M_B( sdr->B, sdr->BAcc );
@@ -1281,7 +1283,7 @@ int m = 0, b = 0;
 		for ( i = 0; i < l; i++ )
 			sdr->str[i] = raw[SDR_STR_OFFSET + i];
 		sdr->str[i+1] = '\0';
-       	}     
+       	}
 
 #ifdef DEBUG
 if ( l > 0 )
