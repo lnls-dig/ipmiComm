@@ -1,3 +1,14 @@
+10Apr2019 (Henrique A. Silva - LNLS)
+Release: R4.3.0
+
+-drvMch.c:
+	-Included maxReading and minReading fields from Full-Sensors SDR
+	-Fixed wrong offset macro on mchFruProdDataGet
+	-Print completion code value when unspecified/unknown
+	-Only overwrite "desc" field when empty
+	-Enable MState (mbbi) to be read on I/O Intr (dirty fix, must be changed later)
+
+
 25Oct2018 (SH)
 Release: R4.2.0
 

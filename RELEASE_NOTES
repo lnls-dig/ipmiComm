@@ -1,3 +1,8 @@
+R4.3.0:		  10-Apr-2019 H. Silva (LNLS)
+		  - Include HOPR and LOPR fields reading from SDR (max/min reading)
+		  - Fixed FRU Product area info reading offset
+                  - Included MState sensor on I/O Intr table
+
 R4.2.0:		  25-Oct-2018 S. Hoobler
 		  - Update to handle latest Advantech firmware
 		  - Misc fixes and minor changes, see ChangeLog for details
